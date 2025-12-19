@@ -92,12 +92,12 @@ export default function DataUpload() {
               </div>
             </div>
             <Button
-              className="w-full"
-              disabled={!file || uploadMutation.isPending}
-              onClick={handleUpload}
-              isLoading={uploadMutation.isPending}
+              className="w-full opacity-70 cursor-not-allowed"
+              disabled={true}
+              onClick={() => toast.error("Uploads are temporarily disabled by the administrator.")}
+              isLoading={false}
             >
-              {uploadMutation.isPending ? 'Uploading...' : 'Upload Dataset'}
+              Uploads Paused (Maintenance)
             </Button>
           </CardContent>
         </Card>

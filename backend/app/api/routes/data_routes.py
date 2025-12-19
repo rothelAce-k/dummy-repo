@@ -136,14 +136,21 @@ async def upload_data(
             detail="Only CSV files are supported"
         )
     
-    os.makedirs(settings.UPLOAD_PATH, exist_ok=True)
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f"uploaded_{timestamp}_{file.filename}"
-    filepath = os.path.join(settings.UPLOAD_PATH, filename)
     
-    content = await file.read()
-    with open(filepath, 'wb') as f:
-        f.write(content)
+    # TEMPORARILY DISABLED
+    raise HTTPException(
+        status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+        detail="Dataset uploads are temporarily disabled for maintenance. Please use the pre-loaded datasets."
+    )
+
+    # os.makedirs(settings.UPLOAD_PATH, exist_ok=True)
+    # timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    # filename = f"uploaded_{timestamp}_{file.filename}"
+    # filepath = os.path.join(settings.UPLOAD_PATH, filename)
+    
+    # content = await file.read()
+    # with open(filepath, 'wb') as f:
+    #     f.write(content)
     
     df = pd.read_csv(filepath)
     
