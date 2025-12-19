@@ -1,0 +1,64 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.pythonlibs/
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+
+# ML models and data
+# ml_models/
+# *.pkl
+# *.joblib
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Build outputs
+frontend/dist/
+.cache/
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Replit specific (keep these)
+!.replit
+!replit.nix
