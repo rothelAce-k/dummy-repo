@@ -1,9 +1,8 @@
 import React from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../components/ui/Card'
 import { Button } from '../components/ui/Button'
 import { Badge } from '../components/ui/Badge'
-import { ArrowLeft, Table, FileSpreadsheet } from 'lucide-react'
+import { ArrowLeft, Table, FileSpreadsheet, Database } from 'lucide-react'
 import { useQuery } from '@tanstack/react-query'
 import { dataApi } from '../lib/api'
 import { Loader } from '../components/ui/Loader'
@@ -34,74 +33,73 @@ export default function DatasetPreview() {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-4">
-        <Button variant="ghost" size="icon" onClick={() => navigate('/data/manage')}>
+        <Button variant="ghost" size="icon" onClick={() => navigate('/data/manage')} className="h-10 w-10 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-500 hover:text-indigo-600 hover:border-indigo-200">
           <ArrowLeft className="h-5 w-5" />
         </Button>
         <div>
-          <h1 className="text-3xl font-bold text-white">Dataset Preview</h1>
-          <p className="text-gray-400">Inspecting dataset ID: {id}</p>
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
+            <Database className="h-8 w-8 text-indigo-500" />
+            Dataset Preview
+          </h1>
+          <p className="text-slate-500 dark:text-slate-400">Inspecting dataset ID: <span className="font-mono text-indigo-500">{id}</span></p>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        <Card className="lg:col-span-1">
-          <CardHeader>
-            <CardTitle>Metadata</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
+        <div className="arch-card lg:col-span-1 bg-white dark:bg-slate-900 p-0">
+          <div className="p-6 border-b border-slate-100 dark:border-slate-800">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white">Metadata</h3>
+          </div>
+          <div className="p-6 space-y-6">
             <div>
-              <div className="text-sm text-gray-400">Row Count</div>
-              <div className="text-xl font-bold text-white">1,245</div>
+              <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Row Count</div>
+              <div className="text-2xl font-bold text-slate-900 dark:text-white">1,245</div>
             </div>
             <div>
-              <div className="text-sm text-gray-400">Column Count</div>
-              <div className="text-xl font-bold text-white">{columns.length}</div>
+              <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Column Count</div>
+              <div className="text-2xl font-bold text-slate-900 dark:text-white">{columns.length}</div>
             </div>
             <div>
-              <div className="text-sm text-gray-400">Missing Values</div>
-              <Badge variant="success">None Detected</Badge>
+              <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Missing Values</div>
+              <Badge variant="success" className="bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">None Detected</Badge>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card className="lg:col-span-3">
-          <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle>Data Sample</CardTitle>
-            <Button variant="outline" size="sm">
+        <div className="arch-card lg:col-span-3 bg-white dark:bg-slate-900 p-0 overflow-hidden">
+          <div className="flex flex-row items-center justify-between p-6 border-b border-slate-100 dark:border-slate-800">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white">Data Sample</h3>
+            <Button variant="outline" size="sm" className="text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700">
               <FileSpreadsheet className="mr-2 h-4 w-4" /> Export CSV
             </Button>
-          </CardHeader>
-          <CardContent>
-            <div className="rounded-lg border border-gray-800 overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm text-left">
-                  <thead className="bg-background-tertiary text-gray-400 uppercase font-medium">
-                    <tr>
-                      {columns.map((col) => (
-                        <th key={col} className="px-6 py-4 whitespace-nowrap">{col}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-800">
-                    {rows.map((row, idx) => (
-                      <tr key={idx} className="hover:bg-white/5 transition-colors">
-                        {columns.map((col) => (
-                          <td key={col} className="px-6 py-4 text-gray-300 whitespace-nowrap">
-                            {col === 'status' ? (
-                              <Badge variant={row[col] === 'Normal' ? 'success' : 'danger'}>
-                                {row[col]}
-                              </Badge>
-                            ) : row[col]}
-                          </td>
-                        ))}
-                      </tr>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm text-left">
+              <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 uppercase font-bold text-xs">
+                <tr>
+                  {columns.map((col) => (
+                    <th key={col} className="px-6 py-4 whitespace-nowrap border-b border-slate-100 dark:border-slate-800">{col}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                {rows.map((row, idx) => (
+                  <tr key={idx} className="hover:bg-slate-50 dark:hover:bg-indigo-900/10 transition-colors">
+                    {columns.map((col) => (
+                      <td key={col} className="px-6 py-4 text-slate-600 dark:text-slate-300 whitespace-nowrap font-mono text-xs">
+                        {col === 'status' ? (
+                          <Badge variant={row[col] === 'Normal' ? 'success' : 'danger'} className={row[col] === 'Normal' ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30' : 'bg-rose-100 text-rose-700 dark:bg-rose-900/30'}>
+                            {row[col]}
+                          </Badge>
+                        ) : row[col]}
+                      </td>
                     ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   )

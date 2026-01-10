@@ -4,58 +4,85 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class', // Enable manual dark mode
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['Space Grotesk', 'ui-sans-serif', 'system-ui'],
+        mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+      },
       colors: {
-        background: {
-          DEFAULT: "#0B0F19", // Deep Space
-          secondary: "#111827", // Card BG
-          tertiary: "#1F2937", // Lighter BG
-        },
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#3B82F6", // Neon Blue
-          hover: "#2563EB",
-          light: "rgba(59, 130, 246, 0.1)",
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
-          DEFAULT: "#8B5CF6", // Purple
-          hover: "#7C3AED",
-          light: "rgba(139, 92, 246, 0.1)",
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
         },
-        success: {
-          DEFAULT: "#10B981", // Emerald
-          light: "rgba(16, 185, 129, 0.1)",
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
         },
-        warning: {
-          DEFAULT: "#F59E0B", // Amber
-          light: "rgba(245, 158, 11, 0.1)",
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
         },
-        danger: {
-          DEFAULT: "#EF4444", // Red
-          light: "rgba(239, 68, 68, 0.1)",
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+          cyan: "#06b6d4",
+          emerald: "#10b981",
+          amber: "#f59e0b",
+          rose: "#f43f5e",
         },
-        surface: {
-          DEFAULT: "rgba(31, 41, 55, 0.7)", // Glass base
-          hover: "rgba(55, 65, 81, 0.7)",
-        }
-      },
-      fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui'],
-        mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        // Legacy/Direct Colors
+        cosmos: {
+          900: '#0B0F19', // Deepest background
+          800: '#111827', // Card background
+          700: '#1F2937', // Light border
+        },
       },
       animation: {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'glow': 'glow 2s ease-in-out infinite alternate',
+        'shimmer': 'shimmer 2.5s linear infinite',
+        'border-flow': 'borderFlow 4s ease infinite',
       },
       keyframes: {
-        glow: {
-          'from': { boxShadow: '0 0 10px -10px rgba(59, 130, 246, 0.5)' },
-          'to': { boxShadow: '0 0 20px 5px rgba(59, 130, 246, 0.5)' },
+        shimmer: {
+          '0%': { backgroundPosition: '-1000px 0' },
+          '100%': { backgroundPosition: '1000px 0' }
+        },
+        borderFlow: {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
         }
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'hero-glow': 'conic-gradient(from 180deg at 50% 50%, #2a2a2a 0deg, #1a1a1a 50%, #2a2a2a 100%)',
+        'mesh-light': 'radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%)',
+        // Prismatic Border Gradient
+        'prismatic': 'linear-gradient(45deg, #6366f1, #06b6d4, #10b981, #f59e0b, #f43f5e, #6366f1)',
+      },
+      boxShadow: {
+        'soft-lg': '0 10px 40px -10px rgba(0,0,0,0.08)',
+        'soft-xl': '0 20px 60px -15px rgba(0,0,0,0.1)',
+        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+        'neon': '0 0 20px rgba(99, 102, 241, 0.5)',
       }
     },
   },
