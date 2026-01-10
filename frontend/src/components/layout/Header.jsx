@@ -1,76 +1,53 @@
 import React from 'react'
-import { Menu, Cpu, ShieldCheck } from 'lucide-react'
-import { useSensor } from '../../contexts/SensorContext'
-import ThemeToggle from '../ThemeToggle'
-import { cn } from '../../lib/utils'
+import { Bell, User, Menu } from 'lucide-react'
+import { Button } from '../ui/Button'
+import { Badge } from '../ui/Badge'
+import { useAuth } from '../../contexts/AuthContext'
+import { cn } from '../utils'
 
 export function Header({ sidebarOpen, setSidebarOpen }) {
-    const { isLive, isDiagnosing } = useSensor()
+    const { user, logout } = useAuth()
 
     return (
-        <header className="sticky top-0 z-40 flex h-16 shrink-0 items-center justify-between px-6 transition-all duration-300 pointer-events-none">
-            {/* Mobile Menu Button - Pointer Events ON */}
+        <header className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-800 bg-background/50 px-4 shadow-sm backdrop-blur-md sm:gap-x-6 sm:px-6 lg:px-8">
             <button
                 type="button"
-                className="pointer-events-auto -m-2.5 p-2.5 text-slate-500 lg:hidden hover:text-indigo-600 transition-colors"
+                className="-m-2.5 p-2.5 text-gray-400 lg:hidden"
                 onClick={() => setSidebarOpen(true)}
             >
                 <span className="sr-only">Open sidebar</span>
                 <Menu className="h-6 w-6" aria-hidden="true" />
             </button>
 
-            {/* Spacer for Flex Alignment (if needed) */}
-            <div className="lg:hidden" />
-
-            {/* Floating Glass Control Bar - Centered/Right Aligned Contextually */}
-            <div className={cn(
-                "pointer-events-auto ml-auto flex items-center gap-4 px-4 py-2 rounded-full",
-                "bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl shadow-sm",
-                "border border-white/20 dark:border-white/5",
-                "transition-all duration-300 hover:bg-white/80 dark:hover:bg-slate-900/80 hover:shadow-md hover:scale-[1.01]"
-            )}>
-
-                {/* Status Indicator Group */}
-                <div className="flex items-center gap-4 border-r border-slate-200 dark:border-slate-800 pr-4 mr-1">
-
-                    {/* Primary Status */}
-                    <div className="flex items-center gap-2">
-                        <div className="relative flex h-2 w-2">
-                            {isLive || isDiagnosing ? (
-                                <span className={cn(
-                                    "animate-ping absolute inline-flex h-full w-full rounded-full opacity-75",
-                                    isDiagnosing ? "bg-amber-400" : "bg-rose-400"
-                                )}></span>
-                            ) : null}
-                            <span className={cn(
-                                "relative inline-flex rounded-full h-2 w-2",
-                                isDiagnosing ? "bg-amber-500" : isLive ? "bg-rose-500" : "bg-slate-400"
-                            )}></span>
+            <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
+                <form className="relative flex flex-1" action="#" method="GET">
+                    {/* Search bar placeholder - can implement later */}
+                </form>
+                <div className="flex items-center gap-x-4 lg:gap-x-6">
+                    <button type="button" className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-300 transition-colors">
+                        <span className="sr-only">View notifications</span>
+                        <div className="relative">
+                            <Bell className="h-6 w-6" aria-hidden="true" />
+                            <div className="absolute top-0 right-0 h-2 w-2 rounded-full bg-primary animate-pulse" />
                         </div>
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-slate-300">
-                            {isDiagnosing ? "Diagnostics" : isLive ? "Live" : "Paused"}
-                        </span>
-                    </div>
+                    </button>
 
-                    {/* Secondary Metrics */}
-                    <div className="hidden sm:flex items-center gap-3">
-                        <div className="flex items-center gap-1.5 opacity-60">
-                            <Cpu className={cn("h-3 w-3", isDiagnosing ? "text-amber-500" : "text-indigo-500")} />
-                            <span className="text-[10px] font-medium text-slate-500 dark:text-slate-400">
-                                {isDiagnosing ? "Verifying..." : "Online"}
+                    <div className="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-800" aria-hidden="true" />
+
+                    <div className="relative">
+                        <div className="flex items-center gap-x-4 lg:flex items-center">
+                            <span className="hidden lg:flex lg:items-center">
+                                <span className="ml-4 text-sm font-semibold leading-6 text-white" aria-hidden="true">
+                                    {user?.username || 'Admin User'}
+                                </span>
+                                <Badge variant="success" className="ml-2 uppercase text-[10px]">PRO</Badge>
                             </span>
-                        </div>
-                        <div className="flex items-center gap-1.5 opacity-60">
-                            <ShieldCheck className="h-3 w-3 text-emerald-500" />
-                            <span className="text-[10px] font-medium text-slate-500 dark:text-slate-400">
-                                Secure
-                            </span>
+                            <Button variant="ghost" size="sm" onClick={logout} className="text-xs ml-4">
+                                Logout
+                            </Button>
                         </div>
                     </div>
                 </div>
-
-                {/* Theme Toggle */}
-                <ThemeToggle />
             </div>
         </header>
     )

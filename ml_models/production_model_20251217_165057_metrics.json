@@ -1,0 +1,110 @@
+{
+  "accuracy": 0.9996,
+  "f1_score": 0.9995994568498067,
+  "precision": 0.9996001943162497,
+  "recall": 0.9996,
+  "cv_mean_f1": 0.9788004057367813,
+  "cv_std_f1": 0.001800368372324997,
+  "confusion_matrix": [
+    [
+      4115,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      205,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      183,
+      0,
+      0
+    ],
+    [
+      1,
+      0,
+      0,
+      143,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      352
+    ]
+  ],
+  "classification_report": {
+    "none": {
+      "precision": 0.9995142093757591,
+      "recall": 1.0,
+      "f1-score": 0.9997570456754131,
+      "support": 4115.0
+    },
+    "micro": {
+      "precision": 1.0,
+      "recall": 0.9951456310679612,
+      "f1-score": 0.9975669099756691,
+      "support": 206.0
+    },
+    "slow": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 183.0
+    },
+    "medium": {
+      "precision": 1.0,
+      "recall": 0.9930555555555556,
+      "f1-score": 0.9965156794425087,
+      "support": 144.0
+    },
+    "catastrophic": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 352.0
+    },
+    "accuracy": 0.9996,
+    "macro avg": {
+      "precision": 0.9999028418751518,
+      "recall": 0.9976402373247033,
+      "f1-score": 0.9987679270187183,
+      "support": 5000.0
+    },
+    "weighted avg": {
+      "precision": 0.9996001943162497,
+      "recall": 0.9996,
+      "f1-score": 0.9995994568498067,
+      "support": 5000.0
+    }
+  },
+  "feature_importance": {
+    "acoustic_energy": 0.28065216541290283,
+    "pressure_psi": 0.18928518891334534,
+    "acoustic_db": 0.16683238744735718,
+    "heuristic_health": 0.08775503933429718,
+    "flow_rate_lpm": 0.04821997135877609,
+    "flow_pressure_ratio": 0.0394735150039196,
+    "vibration_energy": 0.038700804114341736,
+    "acoustic_db_rate": 0.020687099546194077,
+    "acoustic_db_stability": 0.015030864626169205,
+    "pressure_psi_stability": 0.014529935084283352,
+    "pressure_psi_rate": 0.013366473838686943,
+    "vibration_gforce": 0.013048564083874226,
+    "flow_rate_lpm_stability": 0.012984681874513626,
+    "acoustic_db_accel": 0.012748347595334053,
+    "flow_rate_lpm_accel": 0.012341942638158798,
+    "flow_rate_lpm_rate": 0.012272879481315613,
+    "pressure_psi_accel": 0.011237085796892643,
+    "temperature_c": 0.010833031497895718
+  }
+}

@@ -7,7 +7,7 @@ const badgeVariants = {
     success: "bg-success/10 text-success border-success/20",
     warning: "bg-warning/10 text-warning border-warning/20",
     danger: "bg-danger/10 text-danger border-danger/20",
-    outline: "text-slate-900 dark:text-white border-slate-200 dark:border-slate-700",
+    outline: "text-white border-gray-700",
 }
 
 function Badge({ className, variant = "default", ...props }) {

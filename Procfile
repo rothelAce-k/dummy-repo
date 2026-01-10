@@ -1,1 +1,1 @@
-web: gunicorn -w 2 -k uvicorn.workers.UvicornWorker backend.app.main:app --bind 0.0.0.0:$PORT
+web: python run_backend.py

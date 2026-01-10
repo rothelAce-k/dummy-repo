@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     
     DATABASE_URL: str = Field(default="sqlite:///./sql_app.db")
     
-    SECRET_KEY: str = Field(default="your-secret-key-change-in-production", alias="AIPIS_SECRET_KEY")
+    SECRET_KEY: str = Field(default="your-secret-key-change-in-production", alias="SESSION_SECRET")
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     REFRESH_TOKEN_EXPIRE_DAYS: int = 7

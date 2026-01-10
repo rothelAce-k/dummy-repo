@@ -15,67 +15,6 @@ from typing import Optional
 
 router = APIRouter(prefix="/leak", tags=["Leak Detection"])
 
-# Simulated Sensor Registry for Digital Twin
-# Simulated Sensor Registry for Digital Twin - Matched to SensorMonitor.jsx
-TWIN_SENSORS = [
-    {"id": "SENSOR_001", "type": "pump", "name": "Main Pump A", "x": 150, "y": 150},
-    {"id": "SENSOR_002", "type": "valve", "name": "Valve Station B", "x": 450, "y": 150},
-    {"id": "SENSOR_003", "type": "sensor", "name": "Pressure Node C", "x": 600, "y": 300},
-    {"id": "SENSOR_004", "type": "sensor", "name": "Flow Meter D", "x": 450, "y": 450},
-    {"id": "SENSOR_005", "type": "valve", "name": "Safety Valve E", "x": 150, "y": 450},
-]
-
-@router.get("/sensors")
-async def get_digital_twin_sensors(current_user: Optional[User] = Depends(get_optional_user)):
-    """
-    Returns live telemetry for the Digital Twin schematic.
-    Simulates real-time fluctuations for demonstration.
-    """
-    import math
-    import time
-    
-    # Time-based simulation for "Live" feel
-    t = time.time()
-    
-    # Base state - usually healthy
-    system_health = "normal"
-    
-    # If there is a recent 'critical' prediction in DB, reflect that?
-    # For now, let's make it dynamic based on seconds to show 'life'
-    
-    telemetry = []
-    
-    for s in TWIN_SENSORS:
-        # Generate semi-realistic values
-        base_pressure = 85.0
-        base_flow = 120.0
-        
-        # Add sine wave fluctuation
-        noise = math.sin(t + hash(s['id'])) * 2.0
-        
-        status = "normal"
-        # Simulate a "glitch" every 20 seconds for visual interest
-        if int(t) % 20 == 0 and s['type'] == 'valve':
-             status = "warning"
-        
-        telemetry.append({
-            "id": s['id'],
-            "name": s['name'],
-            "type": s['type'],
-            "status": status,
-            "pressure_psi": round(base_pressure + noise, 1),
-            "flow_lpm": round(base_flow + (noise/2), 1),
-            "temperature_c": round(45 + (noise/5), 1),
-            "vibration_mm_s": round(0.5 + abs(noise/10), 2)
-        })
-        
-    return {
-        "timestamp": datetime.utcnow().isoformat(),
-        "system_status": system_health,
-        "sensors": telemetry
-    }
-
-
 # Helper to get user ID safely
 def get_user_id(user: Optional[User]) -> int:
     return user.id if user else 1
